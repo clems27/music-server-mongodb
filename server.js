@@ -1,8 +1,14 @@
 const express = require('express')
+const mongodb = require('mongodb')
+
 const app = express()
 
+const uri = process.env.DATABASE_URI
+
 app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+  mongodb.MongoClient.connect(uri, function(error, client) {
+    response.send('Hello, CYF!')
+  })
 })
 
 app.listen(process.env.PORT)
