@@ -7,7 +7,7 @@ const uri = process.env.DATABASE_URI
 
 app.get('/', function(request, response) {
   mongodb.MongoClient.connect(uri, function(error, client) {
-    response.send('Hello, CYF!')
+    response.send('Hello, world!')
   })
 })
 
