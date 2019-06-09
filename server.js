@@ -11,8 +11,8 @@ app.get('/', function(request, response) {
   client.connect(function() {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
-    const searchObject = 
-    tracksCollection.find().toArray(function(error, tracks){
+    const searchObject = {artist:"Sebastian"}
+    tracksCollection.find(searchObject).toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
     })
