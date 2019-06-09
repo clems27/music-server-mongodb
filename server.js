@@ -4,12 +4,13 @@ const mongodb = require('mongodb')
 const app = express()
 
 const uri = process.env.DATABASE_URI
-
+ 
 app.get('/', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
   client.connect(function() {
-    response.send('Hello, world!')
+    const db = client.db("music")
+    response.send("it worked!")
     client.close()
   })
 })
