@@ -10,8 +10,11 @@ app.get('/', function(request, response) {
 
   client.connect(function() {
     const db = client.db("music")
-    response.send("it worked!")
+    const tracksCollection = db.collection("tracks")
+    tracksCollection.find().toArray(function(error, tracks){
+      response.send("it worked!")
     client.close()
+    })
   })
 })
 
