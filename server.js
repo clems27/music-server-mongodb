@@ -22,10 +22,12 @@ app.get('/tracks/search', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
   client.connect(function() {
-    let searchTerm = request.query.term;
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
-    const seachObject ={artist: searchTerm}
+    const seachObject ={
+      artist: request.query.artist,
+      year: parseInt(request.query.year)
+    }
     tracksCollection.find(seachObject).toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
