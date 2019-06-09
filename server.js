@@ -29,7 +29,14 @@ app.get('/tracks/search', function(request, response) {
        searchObject.artist=request.query.artist
     }
     if(request.query.album){
-       searchObject.artist=request.query.album
+       searchObject.album=request.query.album
+    }
+    
+    if(request.query.title){
+       searchObject.title=request.query.title
+    }
+    if(request.query.year){
+       searchObject.year= parseInt(request.query.year)
     }
     // {
     //   artist: request.query.artist,
