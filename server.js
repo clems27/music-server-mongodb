@@ -12,7 +12,7 @@ app.get('/', function(request, response) {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
     tracksCollection.find().toArray(function(error, tracks){
-      response.send(error || tracks)
+      response.json(error || tracks)
     client.close()
     })
   })
@@ -22,10 +22,10 @@ app.get('/books', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
   client.connect(function() {
-    const db = client.db("music")
-    const tracksCollection = db.collection("tracks")
-    tracksCollection.find().toArray(function(error, tracks){
-      response.send(error || tracks)
+    const db = client.db("literature")
+    const tracksCollection = db.collection("books")
+    tracksCollection.find().toArray(function(error, books){
+      response.json(error || books)
     client.close()
     })
   })
