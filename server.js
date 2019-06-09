@@ -38,12 +38,6 @@ app.get('/tracks/search', function(request, response) {
     if(request.query.year){
        searchObject.year= parseInt(request.query.year)
     }
-    // {
-    //   artist: request.query.artist,
-    //   title: request.query.title,
-    //   album: request.query.album,
-    //   year: parseInt(request.query.year)
-    // }
     tracksCollection.find(searchObject).toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
