@@ -26,6 +26,8 @@ app.get('/tracks/search', function(request, response) {
     const tracksCollection = db.collection("tracks")
     const seachObject ={
       artist: request.query.artist,
+      title: request.query.title,
+      album: request.query.album,
       year: parseInt(request.query.year)
     }
     tracksCollection.find(seachObject).toArray(function(error, tracks){
