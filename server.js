@@ -45,6 +45,27 @@ app.get('/tracks/search', function(request, response) {
   })
 })
 
+app.get('/tracks/:id', function(request, response) {
+  const client = new mongodb.MongoClient(uri)
+
+  client.connect(function() {
+    const db = client.db('music')
+    const tracksCollection = db.collection('tracks')
+
+    const string = '5cf2eb7d1c9d4400006fca92'
+    const id = new mongodb.ObjectID(string)
+    const searchObject = { _id: id }
+
+    tracksCollection.findOne(searchObject, function(error, track) {
+      if(error){
+        response.send({})
+      }
+      response.send(error || track)
+      client.close()
+    })
+  })
+})
+
 app.get('/books', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
