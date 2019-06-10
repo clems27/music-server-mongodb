@@ -57,8 +57,9 @@ app.get('/tracks/:id', function(request, response) {
     const searchObject = { _id: id }
 
     tracksCollection.findOne(searchObject, function(error, track) {
-      if(error){
-        response.send({})
+      if(searchObject !==id){
+        response.status(400);
+response.json('404.jade', {title: '404: File Not Found'});
       }
       response.send(error || track)
       client.close()
