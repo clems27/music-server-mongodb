@@ -57,6 +57,7 @@ app.get('/tracks/:id', function(request, response) {
     const searchObject = { _id: id }
 
     tracksCollection.findOne(searchObject, function(error, track) {
+      if (!searchObject) return next(new Error('No users found.'))
       response.send( track)
       client.close()
     })
