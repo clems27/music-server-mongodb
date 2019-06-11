@@ -52,9 +52,12 @@ app.get('/tracks/:id', function(request, response) {
     const db = client.db('music')
     const tracksCollection = db.collection('tracks')
 
-    const string = "ObjectID"
+    const string = '5cf2eb7d1c9d4400006fca92'
     const id = new mongodb.ObjectID(string)
     const searchObject = { _id: id }
+    if(!{_id:id}){
+       searchObject.artist=request.query.artist
+    }
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
      if(error){
