@@ -57,9 +57,7 @@ app.get('/tracks/:id', function(request, response) {
     const searchObject = { _id: id }
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
-      if(!null){
-        console.log(error)
-}
+      
       console.log(error)
       console.log(tracks)
       response.send(error || tracks)
