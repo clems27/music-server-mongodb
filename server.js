@@ -24,12 +24,19 @@ app.get('/tracks', function(request, response) {
   client.connect(function() {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
-    tracksCollection.find().toArray(function(error, tracks){
+    const searchObject = {
+      artist: {
+        $ne: 'Justice'
+      }
+    }
+
+    tracksCollection.find(searchObject).toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
     })
   })
 })
+
 
 app.get('/tracks/search', function(request, response) {
   const client = new mongodb.MongoClient(uri)
