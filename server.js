@@ -53,18 +53,19 @@ app.get('/tracks/:id', function(request, response) {
     const db = client.db('music')
     const tracksCollection = db.collection('tracks')
 
-    const string = '5cf2eb7d1c9d4400006fca92'
-    const id = new mongodb.ObjectID(string)
+    //const string = '5cf2eb7d1c9d4400006fca92'
+    const id = new mongodb.ObjectID(messageId)
     let searchObject = { _id: id }
+    const messageId =request.params.id
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
-      const messageId =request.params.id
-      const myMessage =tracksCollection.find(track=> track.id ==messageId);
-      console.log(error)
-      console.log(tracks._id)
-      console.log(searchObject)
-      console.log(id)
-      response.send(error || tracks)
+      if(messageId !==searchObject){
+        console.log("error")
+        response.send({error: `error`})
+      }
+      if(messageId ===searchObject){
+      response.send( tracks)
+      }
       client.close()
     })
   })
