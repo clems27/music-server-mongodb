@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mildredfads Airwaves</title>
+  </head>
+  <body>
+    <h1>
+      The presidential Airwaves
+    </h1>
+    <h2>
+     Like good music? this is a station
+    </h2>
+    <form action="/messages" method="post">
+      <p>
+        Name: <input type="text" name="from" placeholder="Your Name"  id="name-input"  required/> <br />
+        <label id ="name-error" class="error" />   
+      </p>
+      <p>
+        Message: <input type="text" name="text" placeholder="The message..." id="text-input" required/> <br />
+      <label id ="text-error" class="error" />   
+      </p>
+      <button type="submit" id="button">
+        Send
+      </button>
+    </form>
+    
+    <a href="/messages">See all messages</a>
+    </body>
+  </html>
