@@ -18,18 +18,37 @@ app.get('/', function(request, response) {
   })
 })
 
-app.get('/tracks', function(request, response) {
+app.get('/tracks/new', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
   client.connect(function() {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
     const searchObject = {
-      artist: {
-        $ne: 'Justice'
+      year: {
+        $gt: 2010
       }
     }
+    
+    tracksCollection.find(searchObject).toArray(function(error, tracks){
+      response.json(error || tracks)
+    client.close()
+    })
+  })
+})
 
+app.get('/tracks/old', function(request, response) {
+  const client = new mongodb.MongoClient(uri)
+
+  client.connect(function() {
+    const db = client.db("music")
+    const tracksCollection = db.collection("tracks")
+    const searchObject = {
+      year: {
+        $lte: 2000
+      }
+    }
+    
     tracksCollection.find(searchObject).toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
