@@ -72,6 +72,7 @@ app.get('/tracks/:id', function(request, response) {
 
 function isValidHex(stringId) {
 var testId = parseInt(stringId,24);
+  console.log(stringId)
 return (testId.toString(24) ===stringId.toLowerCase())
 }
 
