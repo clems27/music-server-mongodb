@@ -48,7 +48,7 @@ app.get('/tracks/search', function(request, response) {
 
 app.get('/tracks/:id', function(request, response) {
     const client = new mongodb.MongoClient(uri)  
-    const stringId = parseInt(request.params.id);
+    const stringId = request.params.id
     const id = new mongodb.ObjectID(stringId) 
     console.log (id)
     const searchObject = { _id: id }
@@ -58,9 +58,9 @@ app.get('/tracks/:id', function(request, response) {
     const collection = db.collection('tracks')
     collection.findOne(searchObject, function(error, track) {
       if(track===null){
-         return response.status(404).json({Error:`Track not found`})
+         return response.status(404).json({Error :`Track not found`})
       }
-      response.send(error || track)
+      response.status(200).json(error || track)
       client.close()
     })
   })
