@@ -59,15 +59,15 @@ app.get('/tracks/:id', function(request, response) {
     let searchObject = { _id: id }
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
-      if(messageId === searchObject._id){
-        return tracks
-        response.send( tracks)
-        console.log(messageId)
-        console.log(searchObject._id)
-      }
-      else{
-        response.send({error: `error`})
-      }
+      // if(searchObject._id ==messageId){
+      //   response.status(200).json(tracks)
+      //   console.log(messageId)
+      //   console.log(searchObject._id)
+      // }
+      // else if(searchObject !==messageId){
+      //   response.send({error: `error`})
+      // }
+      response.send(error || tracks)
       client.close()
     })
   })
