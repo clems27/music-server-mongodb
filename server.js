@@ -11,9 +11,19 @@ app.get('/', function(request, response) {
   client.connect(function() {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
-    const searchObject = {
-      $or: [{ artist: 'Justice' }, { artist: 'Sebastian' }]
-    }
+    tracksCollection.find().toArray(function(error, tracks){
+      response.json(error || tracks)
+    client.close()
+    })
+  })
+})
+
+app.get('/tracks', function(request, response) {
+  const client = new mongodb.MongoClient(uri)
+
+  client.connect(function() {
+    const db = client.db("music")
+    const tracksCollection = db.collection("tracks")
     tracksCollection.find().toArray(function(error, tracks){
       response.json(error || tracks)
     client.close()
