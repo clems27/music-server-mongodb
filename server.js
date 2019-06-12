@@ -25,6 +25,7 @@ app.get('/tracks/search', function(request, response) {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
     const searchObject = {}
+    console.log(searchObject)
     if(request.query.artist){
        searchObject.artist=request.query.artist
     }
@@ -54,9 +55,13 @@ app.get('/tracks/:id', function(request, response) {
 
     const string = '5cf2eb7d1c9d4400006fca92'
     const id = new mongodb.ObjectID(string)
-    const searchObject = { _id: id }
+    let searchObject = { _id: id }
+    if(request.query.artist){
+       searchObject.artist=request.query.artist
+    }
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
+      searchObject ={}
       
       console.log(error)
       console.log(tracks)
