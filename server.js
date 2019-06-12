@@ -48,14 +48,17 @@ app.get('/tracks/search', function(request, response) {
 
 app.get('/tracks/:id', function(request, response) {
   const client = new mongodb.MongoClient(uri)
+  const stringId =request.params.id
+  if(!isValidHex(stringId)){
+    return response.status(400).send("Invalid Id")
+  }
 
   client.connect(function() {
     const db = client.db('music')
     const tracksCollection = db.collection('tracks')
 
     //const string = '5cf2eb7d1c9d4400006fca92'
-    const messageId =request.params.id
-    const id = new mongodb.ObjectID(messageId)
+    const id = new mongodb.ObjectID(stringId)
     let searchObject = { _id: id }
 
     tracksCollection.findOne(searchObject, function(error, tracks) {
