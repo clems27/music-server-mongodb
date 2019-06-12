@@ -56,11 +56,7 @@ app.get('/tracks/:id', function(request, response) {
     const id = new mongodb.ObjectID(string)
     const searchObject = { _id: id }
 
-    tracksCollection.findOne(searchObject).toArray( function(error, tracks) {
-      tracksCollection.find(searchObject).toArray(function(error, tracks){
-      // if(id ===searchObject._id){
-      //   response.status(200).json(tracks)
-      // }
+    tracksCollection.findOne(searchObject, function(error, tracks) {
       
       console.log(error)
       console.log(tracks)
