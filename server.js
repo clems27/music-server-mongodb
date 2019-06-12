@@ -62,7 +62,7 @@ app.get('/tracks/:id', function(request, response) {
     const tracksCollection = db.collection('tracks')
     tracksCollection.findOne(searchObject, function(error, track) {
       if(track===null){
-      return response.status(404).json({404 :`Track not found`})
+      return response.status(404).json({Error :`Track not found`})
       }
       response.status(200).json(error || track)
       client.close()
