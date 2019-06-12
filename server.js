@@ -47,30 +47,20 @@ app.get('/tracks/search', function(request, response) {
 })
 
 app.get('/tracks/:id', function(request, response) {
-  const client = new mongodb.MongoClient(uri)
-  const stringId =request.params.id
-  if(!isValidHex(stringId)){
-    return response.status(400).send("Invalid Id")
-  }
+    const client = new mongodb.MongoClient(uri)  
+    const stringId = parseInt(request.params.id);
+    const id = new mongodb.ObjectID(stringId) 
+    console.log (id)
+    const searchObject = { _id: id }
 
   client.connect(function() {
     const db = client.db('music')
-    const tracksCollection = db.collection('tracks')
-
-    //const string = '5cf2eb7d1c9d4400006fca92'
-    const id = new mongodb.ObjectID(stringId)
-    let searchObject = { _id: id }
-
-    tracksCollection.findOne(searchObject, function(error, tracks) {
-      // if(searchObject._id ==messageId){
-      //   response.status(200).json(tracks)
-      //   console.log(messageId)
-      //   console.log(searchObject._id)
-      // }
-      // else if(searchObject !==messageId){
-      //   response.send({error: `error`})
-      // }
-      response.send(error || tracks)
+    const collection = db.collection('tracks')
+    collection.findOne(searchObject, function(error, track) {
+      if(track===null){
+         return response.status(404).json({Error:`Track not found`})
+      }
+      response.send(error || track)
       client.close()
     })
   })
