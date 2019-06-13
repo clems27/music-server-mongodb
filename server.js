@@ -92,7 +92,7 @@ app.get('/tracks/search', function(request, response) {
 app.get('/tracks/:id', function(request, response) {
     const client = new mongodb.MongoClient(uri)  
     const stringId = request.params.id
-    if(isValidHex(stringId)){
+    if(!isValidHex(stringId)){
         return response.status(400).send('Invalid Id')
 
     }
@@ -114,9 +114,11 @@ app.get('/tracks/:id', function(request, response) {
 })
 
 function isValidHex(stringId) {
- // return stringId.length===24;
-var testId = parseInt(stringId,24);
-return (testId.toString(24) ===stringId.toLowerCase())
+  //return stringId.length===24;
+  
+var testId = parseInt(stringId,16);
+  console.log(testId, testId.toString(16), stringId.toLowerCase())
+return (testId.toString(16) ===stringId.toLowerCase())
 }
 
 app.get('/books', function(request, response) {
