@@ -5,18 +5,6 @@ const app = express()
 
 const uri = process.env.DATABASE_URI
  
-// app.get('/', function(request, response) {
-//   const client = new mongodb.MongoClient(uri)
-
-//   client.connect(function() {
-//     const db = client.db("music")
-//     const tracksCollection = db.collection("tracks")
-//     tracksCollection.find().toArray(function(error, tracks){
-//       response.json(error || tracks)
-//     client.close()
-//     })
-//   })
-// })
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
 });
@@ -33,6 +21,7 @@ app.get('/tracks', function(request, response) {
     })
   })
 })
+
 app.get('/tracks/new', function(request, response) {
   const client = new mongodb.MongoClient(uri)
 
