@@ -114,11 +114,11 @@ app.get('/tracks/:id', function(request, response) {
 })
 
 function isValidHex(stringId) {
-  //return stringId.length===24;
+return stringId.length===24;
   
-var testId = parseInt(stringId,16);
-  console.log(testId, testId.toString(16), stringId.toLowerCase())
-return (testId.toString(16) ===stringId.toLowerCase())
+// var testId = parseInt(stringId,16);
+//   console.log(testId, testId.toString(16), stringId.toLowerCase())
+// return (testId.toString(16) ===stringId.toLowerCase())
 }
 
 app.get('/books', function(request, response) {
