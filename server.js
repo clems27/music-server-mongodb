@@ -68,7 +68,7 @@ app.get('/tracks/search', function(request, response) {
     const db = client.db("music")
     const tracksCollection = db.collection("tracks")
     const searchObject = {}
-    console.log(searchObject)
+    
     if(request.query.artist){
        searchObject.artist=request.query.artist
     }
@@ -93,12 +93,11 @@ app.get('/tracks/:id', function(request, response) {
     const client = new mongodb.MongoClient(uri)  
     const stringId = request.params.id
     if(!isValidHex(stringId)){
-        return response.status(400).send('Invalid Id')
+        return response.status(400).json({Error:'Invalid Id'})
 
     }
     const id = new mongodb.ObjectID(stringId) 
     const searchObject = { _id: id }
-    console.log(searchObject)
 
   client.connect(function() {
     const db = client.db('music')
@@ -114,11 +113,11 @@ app.get('/tracks/:id', function(request, response) {
 })
 
 function isValidHex(stringId) {
-return stringId.length===24;
+//return stringId.length===24;
   
-// var testId = parseInt(stringId,16);
-//   console.log(testId, testId.toString(16), stringId.toLowerCase())
-// return (testId.toString(16) ===stringId.toLowerCase())
+var testId = parseInt(stringId,16);
+  console.log(testId, testId.toString(16), stringId.toLowerCase())
+return (testId.toString(16) ===stringId.toLowerCase())
 }
 
 app.get('/books', function(request, response) {
