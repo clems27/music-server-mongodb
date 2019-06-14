@@ -120,16 +120,4 @@ return stringId.length===24;
 // return (testId.toString(16) ===stringId.toLowerCase())
 }
 
-app.get('/books', function(request, response) {
-  const client = new mongodb.MongoClient(uri)
-
-  client.connect(function() {
-    const db = client.db("literature")
-    const tracksCollection = db.collection("books")
-    tracksCollection.find().toArray(function(error, books){
-      response.json(error || books)
-    client.close()
-    })
-  })
-})
 app.listen(process.env.PORT)
